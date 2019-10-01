@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>飞机大战</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        .box {
+            width: 320px;
+            height: 568px;
+            background-color: rgb(190, 190, 190);
+            margin: 0 auto;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px 4px rgb(201, 201, 201);
+        }
+
+        .bg {
+            width: 320px;
+            height: 1136px;
+            position: absolute;
+            top: -568px;
+        }
+
+        .bg img {
+            display: block;
+            width: 320px;
+            height: 568px;
+
+        }
+
+        .herofly {
+            width: 66px;
+            height: 82px;
+            background-image: url('./img/herofly.png');
+            position: absolute;
+            top: 486px;
+            left: 127px;
+        }
+
+        .enemy {
+            position: absolute;
+        }
+
+        .enemy1 {
+            width: 38px;
+            height: 34px;
+            background-image: url('./img/enemy1.png');
+            top: -34px;
+            left: 0;
+        }
+
+        .enemy2 {
+            width: 46px;
+            height: 64px;
+            background-image: url('./img/enemy2.png');
+            top: -64px;
+            left: 0;
+        }
+
+        .enemy3 {
+            width: 110px;
+            height: 164px;
+            background-image: url('./img/enemy3.png');
+            top: -164px;
+            left: 0;
+        }
+
+        .bullet {
+            width: 6px;
+            height: 14px;
+            background-image: url('./img/bullet1.png');
+            position: absolute;
+            top: 472px;
+            left: 158px;
+        }
+
+        .prop1 {
+            width: 39px;
+            height: 68px;
+            background-image: url('./img/prop.png');
+            background-position: 0;
+            position: absolute;
+            top: -68px;
+            left: 0;
+        }
+
+        .prop2 {
+            width: 39px;
+            height: 68px;
+            background-image: url('./img/prop.png');
+            background-position: -39px;
+            position: absolute;
+            top: -68px;
+            left: 0;
+        }
+
+        .prop3 {
+            width: 39px;
+            height: 68px;
+            background-image: url('./img/prop.png');
+            background-position: -78px;
+            position: absolute;
+            top: -68px;
+            left: 0;
+        }
+
+        .bomb {
+            width: 320px;
+            height: 36px;
+            /* background-color: rgb(73, 73, 73); */
+            position: absolute;
+            bottom: 0;
+        }
+
+        .bombs {
+            width: 42px;
+            height: 36px;
+            background-image: url('./img/bomb.png');
+            float: left;
+        }
+
+        .score {
+            position: absolute;
+            font-size: 17px;
+            color: rgb(172, 60, 60);
+            margin-left: 5px;
+        }
+
+        .gameover {
+            width: 230px;
+            height: 200px;
+            background-color: #CCC;
+            position: absolute;
+            left: 45px;
+            top: 100px;
+            box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .gameover .top {
+            font-size: 20px;
+            margin-top: 20px;
+
+        }
+
+        button {
+            border: 0;
+        }
+
+        .reset {
+            width: 100px;
+            height: 30px;
+            background-color: rgb(156, 156, 156);
+            outline: none;
+            margin-top: 20px;
+        }
+
+        .rank {
+            display: block;
+            width: 100px;
+            height: 30px;
+            background-color: rgb(156, 156, 156);
+            outline: none;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .start {
+            width: 230px;
+            height: 200px;
+            background-color: #CCC;
+            position: absolute;
+            left: 45px;
+            top: 150px;
+            box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .startBtn {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(82, 82, 82);
+            margin: 0 auto;
+            margin-top: 50px;
+            line-height: 100px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0px 0px 10px 4px rgb(134, 134, 134);
+        }
+
+        .startBtn:hover {
+            box-shadow: 0px 0px 10px 4px rgb(85, 85, 85);
+            background-color: rgb(107, 107, 107);  
+            cursor: pointer;          
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="bg" id="bg">
+            <img src="./img/background.png" alt="">
+            <img src="./img/background.png" alt="">
+        </div>
+        <div class="herofly" id="herofly"></div>
+        <div class="enemys" id="enemys"></div>
+        <div class="bullets" id="bullets">
+            <!-- <div class="bullet"></div> -->
+        </div>
+        <div class="prop" id="prop">
+            <!-- <div class="prop1"></div>
+            <div class="prop2"></div>
+            <div class="prop3"></div> -->
+        </div>
+        <div class="bomb" id="bomb">
+            <!-- <div class="bombs"></div>
+            <div class="bombs"></div> -->
+        </div>
+        <div class="score" id="score">
+            <p id="scoreNum">分数：0</p>
+        </div>
+        <div class="gameover hide" id="gameover">
+            <p class="top" id="gameover-top">你的分数为：0</p>
+            <button class="reset" onclick="reset()">再来一局</button>
+            <button class="rank" onclick="rank()">排行榜</button>
+        </div>
+        <div class="start" id="start">
+            <div class="startBtn" onclick="start()">
+                开始
+            </div>
+        </div>
+    </div>
+    <script>
+        //公共变量
+        var score = 0;
+        //最大的timer
+        var allTimer = null;
+
+        localStorage.list = localStorage.list || '[]';
+        
+        //封装获取元素的方法
+        function $(idName) {
+            return document.getElementById(idName);
+        }
+
+        //生成随机数
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        
+
+    </script>
+    <script src="./js/bgMove.js"></script>
+    <script src="./js/herofly.js"></script>
+    <script src="./js/enemys.js"></script>
+    <script src="./js/bullet.js"></script>
+    <script src="./js/prop.js"></script>
+    <script src="./js/crash.js"></script>
+    <script>
+        //start函数
+        function start() {
+            $('start').className = 'start hide';
+            allTimer = setInterval(function () {
+                bgMove();
+                herofly();
+                enemys();
+                bullet();
+                prop();
+                crash();
+            }, 30);
+        }
+
+    //刷新页面，重新开始
+    function reset() {
+        location.reload();
+    }
+    </script>
+</body>
+
+</html>
